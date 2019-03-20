@@ -1,0 +1,31 @@
+{
+  "host": "localhost",
+  "port": 3030,
+  "public": "../public/",
+  "paginate": false,
+  "authentication": {
+    "secret": "7624c217e9ae4cf1ebe2fbd094f5867b15015107b35ca8bee304eb01c3e7412f29416d3fc9701335ea03a8e2575e4eb29b832bf992facc1cee88bc42080c4d56a60738e5384890cb653cecf61275acf7a58ce8230f257c72f014d213b353c38b4d22dcca2ae3dccf9b233d310f632c6822d7c4fd857b2a5bedf15c3e982baa2e231dd891cd37b66d47ec85d924d85906adf271ab0d126c6de4bffba08df9fdf6ecf6d65e10271994556dda546e68d448dbb9ace31c5a1c2e0a902a5659702f732c6fc8bd46d5ebc66e424ebcd087334af048f501009579def54caa755fad34de2a3e70d981f2d0326237190b81739d74e0f15b8b926dc8b00387672374c2baa4",
+    "strategies": [
+      "jwt",
+      "local"
+    ],
+    "path": "/authentication",
+    "service": "users",
+    "jwt": {
+      "header": {
+        "typ": "access"
+      },
+      "audience": "https://metadata.os2geo.dk",
+      "subject": "anonymous",
+      "issuer": "feathers",
+      "algorithm": "HS256",
+      "expiresIn": "1d"
+    },
+    "local": {
+      "entity": "user",
+      "usernameField": "email",
+      "passwordField": "password"
+    }
+  },
+  "postgres": "postgres://postgres:Zxcv1234@localhost:5432/meta"
+}

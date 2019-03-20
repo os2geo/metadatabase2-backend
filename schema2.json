@@ -1,0 +1,209 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Metadata",
+    "description": "",
+    "type": "object",
+    "properties": {
+        "properties": {
+            "type": "object",
+            "properties": {
+                "temanavn": {
+                    "type": "string",
+                    "title": "Temanavn"
+                },
+                "beskrivelse": {
+                    "type": "string",
+                    "title": "Beskrivelse, anvendelse, formål"
+                },
+                "borgerGIS": {
+                    "type": "boolean",
+                    "title": "Vises tema også på KortInfo Borger?"
+                },
+                "ID": {
+                    "type": "integer"
+                },
+                "bem": {
+                    "type": "string",
+                    "title": "Bemærkning"
+                },
+                "Oprindelse": {
+                    "title": "Oprindelse",
+                    "type": "string"
+                },
+                "Tabel_view_navn": {
+                    "title": "Tabel-/viewnavn",
+                    "type": "string"
+                },
+                "DataLink": {
+                    "title": "WMS / WFS / FTP m.m. link",
+                    "type": "string",
+                    "format": "uri"
+                },
+                "InfoLink": {
+                    "type": "string",
+                    "title": "Link til mere info",
+                    "format": "uri"
+                },
+                "Lagsti_KI": {
+                    "title": "Lagsti i KortInfo",
+                    "type": "string"
+                },
+                "Lagsti_MI": {
+                    "title": "Lagsti i på T:\\_Grunddata",
+                    "type": "string"
+                },
+                "Dataformat_KI": {
+                    "type": "string",
+                    "title": "Format på data i KortInfo",
+                    "default": "Database",
+                    "enum": [
+                        "Database",
+                        "Egen_db",
+                        "Fil",
+                        "WFS",
+                        "WMS",
+                        "WMTS",
+                        "Laggruppe",
+                        "?"
+                    ]
+                },
+                "Dataformat_MI": {
+                    "title": "Format på data i MapInfo",
+                    "type": "string",
+                    "enum": [
+                        "Database",
+                        "Fil",
+                        "WMS",
+                        "WFS",
+                        "?"
+                    ]
+                },
+                "Lagnavn_MI": {
+                    "title": "Lagnavn på T:\\_Grunddata",
+                    "type": "string"
+                },
+                "Database": {
+                    "title": "Databasenavn",
+                    "type": "string"
+                },
+                "Laggruppe_KI": {
+                    "title": "Laggruppe på Kortinfo",
+                    "type": "string"
+                },
+                "FilDel_mi": {
+                    "title": "Delmængde af fil i DB",
+                    "type": "string"
+                },
+                "Dataudstiller": {
+                    "title": "Dataudstiller",
+                    "type": "string"
+                },
+                "Lagnavn_KI": {
+                    "title": "Lagnavn",
+                    "type": "string"
+                },
+                "Ajourdato": {
+                    "title": "Ajourføringsdato",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "Originaldata": {
+                    "title": "Hvor ligger originaldata?",
+                    "type": "string",
+                    "enum": [
+                        "?",
+                        "db_Gis",
+                        "db_kommuneplankladde",
+                        "db_LOIS",
+                        "GeoDK",
+                        "KortInfo",
+                        "R:Gis",
+                        "R:Sagsbehandler",
+                        "WMS/WFS",
+                        "db_Kommuneplan2017",
+                        "Fil"
+                    ]
+                },
+                "Schema": {
+                    "title": "",
+                    "type": "string"
+                },
+                "Timestamp": {
+                    "title": "Dato for seneste ændring af metadata (Udfyldes automatisk)",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "ajourforfrekvens": {
+                    "type": "string",
+                    "title": "Ajourføringsfrekvens",
+                    "enum": [
+                        "Statisk",
+                        "Hvert 4. år",
+                        "Årlig",
+                        "Halvårlig",
+                        "Kvartalsvis",
+                        "Månedlig",
+                        "Ugentlig",
+                        "Daglig",
+                        "Efter behov",
+                        "?"
+                    ]
+                },
+                "ansvar_fperson": {
+                    "type": "string",
+                    "title": "Ansvarlig fagperson"
+                },
+                "ansvar_afd": {
+                    "type": "string",
+                    "enum": [
+                        "Driften",
+                        "GIS",
+                        "Vej & Park",
+                        "Natur",
+                        "Miljø",
+                        "Byg",
+                        "Plan",
+                        "Strategisk udvikling",
+                        "IT",
+                        "Spildevand",
+                        "Beredskab",
+                        "Andet",
+                        "?",
+                        "Kort & Data"
+                    ],
+                    "title": "Ansvarlig faggruppe"
+                },
+                "OrganisatAnsvar": {
+                    "title": "Organisation der fremstiller data",
+                    "type": "string",
+                    "default": "Fredericia Kommune"
+                },
+                "Konfliktsogtekst": {
+                    "title": "Konfliktsøgningstekst",
+                    "type": "string"
+                },
+                "KonfliktSamlet": {
+                    "title": "Er data med i Samletkonfliktsøgning?",
+                    "type": "boolean"
+                },
+                "konfliktByg": {
+                    "type": "boolean",
+                    "title": "Er data med i Bygkonfliktsøgning?"
+                },
+                "Kommuneplan": {
+                    "title": "Temaet opdateres automatisk i Kommuneplan 2017?",
+                    "type": "boolean"
+                }
+            },
+            "title": "Oversigt",
+            "additionalProperties": true,
+            "required": [
+                "temanavn"
+            ]
+        }
+    },
+    "required": [
+        "properties"
+    ],
+    "additionalProperties": true
+ }
