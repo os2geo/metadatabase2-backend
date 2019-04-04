@@ -5,29 +5,19 @@ const DataTypes = Sequelize.DataTypes;
 
 module.exports = function (app) {
   const sequelizeClient = app.get('sequelizeClient');
-  const users = sequelizeClient.define('users', {
+  const data = sequelizeClient.define('data', {
     id: {
       type: DataTypes.UUID,
       primaryKey: true,
       defaultValue: DataTypes.UUIDV4
     },
-    name: {
-      type: DataTypes.STRING,
+    doc: {
+      type: DataTypes.JSONB,
       allowNull: false
-    },
-    email: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true
-    },
-    password: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
+    }
   }, {
     indexes: [
-      { method: 'BTREE', fields: ['organizationId'] },
-      { method: 'BTREE', fields: ['roleId'] }
+      { method: 'BTREE', fields: ['databaseId'] }
     ],
     hooks: {
       beforeCount(options) {
@@ -37,12 +27,11 @@ module.exports = function (app) {
   });
 
   // eslint-disable-next-line no-unused-vars
-  users.associate = function (models) {
+  data.associate = function (models) {
     // Define associations here
     // See http://docs.sequelizejs.com/en/latest/docs/associations/
-    users.belongsTo(models.organizations, { onDelete: 'CASCADE' }); // generates organizationId
-    users.belongsTo(models.roles, { onDelete: 'CASCADE' }); // generates roleId
+    data.belongsTo(models.databases, { onDelete: 'CASCADE', foreignKey: 'databaseId' }); // generates databaseId
   };
 
-  return users;
+  return data;
 };

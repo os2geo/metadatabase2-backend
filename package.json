@@ -28,7 +28,8 @@
     "dev": "nodemon src/",
     "start": "node src/",
     "mocha": "mocha test/ --recursive --exit",
-    "db": "docker run -e POSTGRES_PASSWORD=Zxcv1234 -e POSTGRES_DB=meta -v `pwd`/database:/var/lib/postgresql/data -p 5432:5432 -d mdillon/postgis"
+    "db": "docker run -e POSTGRES_PASSWORD=Zxcv1234 -e POSTGRES_DB=meta -v `pwd`/database:/var/lib/postgresql/data -p 5432:5432 -d mdillon/postgis",
+    "es": "docker run -p 9200:9200 -p 9300:9300 -e 'discovery.type=single-node' -v `pwd`/esdata:/usr/share/elasticsearch/data -d docker.elastic.co/elasticsearch/elasticsearch:6.7.0"
   },
   "dependencies": {
     "@feathersjs/authentication": "^2.1.16",
@@ -39,18 +40,21 @@
     "@feathersjs/express": "^1.3.1",
     "@feathersjs/feathers": "^3.3.1",
     "@feathersjs/socketio": "^3.2.9",
-    "compression": "^1.7.3",
+    "compression": "^1.7.4",
     "cors": "^2.8.5",
-    "feathers-sequelize": "^4.1.1",
+    "elasticsearch": "^15.4.1",
+    "feathers-elasticsearch": "^1.4.0",
+    "feathers-sequelize": "^5.0.1",
     "helmet": "^3.16.0",
-    "nano": "^8.0.0",
+    "nano": "^8.0.1",
     "pg": "^7.9.0",
-    "sequelize": "^4.43.0",
+    "sequelize": "^5.2.11",
     "serve-favicon": "^2.5.0",
+    "uuid": "^3.3.2",
     "winston": "^3.2.1"
   },
   "devDependencies": {
-    "eslint": "^5.15.2",
+    "eslint": "^5.16.0",
     "mocha": "^5.2.0",
     "nodemon": "^1.18.10",
     "request": "^2.88.0",

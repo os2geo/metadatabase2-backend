@@ -1,7 +1,7 @@
-// Initializes the `data` service on path `/data`
+// Initializes the `users-roles` service on path `/users-roles`
 const createService = require('feathers-sequelize');
-const createModel = require('../../models/data.model');
-const hooks = require('./data.hooks');
+const createModel = require('../../models/users-groups.model');
+const hooks = require('./users-groups.hooks');
 
 module.exports = function (app) {
   const Model = createModel(app);
@@ -14,10 +14,10 @@ module.exports = function (app) {
   };
 
   // Initialize our service with any options it requires
-  app.use('/data', createService(options));
+  app.use('/users-groups', createService(options));
 
   // Get our initialized service so that we can register hooks
-  const service = app.service('data');
+  const service = app.service('users-groups');
 
   service.hooks(hooks);
 };

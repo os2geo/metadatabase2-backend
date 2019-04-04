@@ -1,5 +1,5 @@
 const databasesSeed = require('./databases');
-const nano = require('nano')({ 
+const nano = require('nano')({
   url : 'http://admin:wont775dock@geo.os2geo.dk/couchdb',
   parseUrl : false
 });
@@ -33,19 +33,19 @@ module.exports = async app => {
       if(organizations.total === 0){
         let logo = null;
         try {
-          logo = await adminDb.attachment.get(organization.id, 'logo'); 
-        } 
+          logo = await adminDb.attachment.get(organization.id, 'logo');
+        }
         catch(err) {
           console.log('error logo', organization.value.name);
         }
         try {
-        
+
           await serviceOrganizations.create({
             id: organization.id,
             name: organization.value.name,
             logo
           });
-        
+
         } catch(err) {
           console.log('error create organization', organization.value.name);
         }

@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-vars */
-const createService = require('feathers-sequelize');
-const Sequelize = require('sequelize');
-const DataTypes = Sequelize.DataTypes;
+const elasticsearch = require('elasticsearch');
+const createService = require('feathers-elasticsearch');
 
 class Service {
   constructor(options) {
@@ -41,53 +40,31 @@ class Service {
   setup(app) {
     this.app = app;
   }
-  createSchema(name, node) {
-    if(name === 'geometry') {
-      return {
-        type: DataTypes.GEOMETRY
-      };
-    }
-    if(node.type === 'string') {
-      return {
-        type: DataTypes.TEXT
-      };
-    }
-    if(node.type === 'number') {
-      return {
-        type: DataTypes.REAL
-      };
-    }
-  }
+
   async getService(id) {
     if (this.services.hasOwnProperty(id)) {
       return this.services[id];
     }
-    const database = await this.app.service('databases').get(id);
-    const sequelizeClient = this.app.get('sequelizeClient');
-    const schema = {
-      id: {
-        type: DataTypes.UUID,
-        primaryKey: true,
-        defaultValue: DataTypes.UUIDV4
-      }
-    };
-    const name = id.replace(/-/g, '_');
-    const Model = sequelizeClient.define(name, schema, {
-      schema: 'data',
-      hooks: {
-        beforeCount(options) {
-          options.raw = true;
-        }
-      }
+    const Model = new elasticsearch.Client({
+      host: 'localhost:9200',
+      apiVersion: '6.0'
     });
-    const options = {
+
+    const exists = await Model.indices.exists({ index: id });
+    if(!exists) {
+      const res = await Model.indices.create({ index: id });
+      console.log(res);
+    }
+    const service = createService({
       Model,
-      paginate: false
-    };
-    const service = createService(options);
+      paginate: this.app.get('paginate'),
+      elasticsearch: {
+        index: id,
+        type: 'docs'
+      },
+      esVersion: '6.0'
+    });
     this.services[id] = service;
-    await sequelizeClient.createSchema('data');
-    await sequelizeClient.sync();
     return service;
   }
 }

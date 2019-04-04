@@ -5,30 +5,23 @@ const DataTypes = Sequelize.DataTypes;
 
 module.exports = function (app) {
   const sequelizeClient = app.get('sequelizeClient');
-  const users = sequelizeClient.define('users', {
+  const permissions = sequelizeClient.define('permissions', {
     id: {
       type: DataTypes.UUID,
       primaryKey: true,
       defaultValue: DataTypes.UUIDV4
     },
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    email: {
-      type: DataTypes.STRING,
+    read: {
+      type: DataTypes.BOOLEAN,
       allowNull: false,
-      unique: true
+      defaultValue: true
     },
-    password: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
+    write: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: true
+    }
   }, {
-    indexes: [
-      { method: 'BTREE', fields: ['organizationId'] },
-      { method: 'BTREE', fields: ['roleId'] }
-    ],
     hooks: {
       beforeCount(options) {
         options.raw = true;
@@ -37,12 +30,12 @@ module.exports = function (app) {
   });
 
   // eslint-disable-next-line no-unused-vars
-  users.associate = function (models) {
+  permissions.associate = function (models) {
     // Define associations here
     // See http://docs.sequelizejs.com/en/latest/docs/associations/
-    users.belongsTo(models.organizations, { onDelete: 'CASCADE' }); // generates organizationId
-    users.belongsTo(models.roles, { onDelete: 'CASCADE' }); // generates roleId
+    permissions.belongsTo(models.columns, { onDelete: 'CASCADE' }); // generates columnId
+    permissions.belongsTo(models.groups, { onDelete: 'CASCADE' }); // generates roleId
   };
 
-  return users;
+  return permissions;
 };

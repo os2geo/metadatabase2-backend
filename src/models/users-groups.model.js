@@ -5,29 +5,16 @@ const DataTypes = Sequelize.DataTypes;
 
 module.exports = function (app) {
   const sequelizeClient = app.get('sequelizeClient');
-  const users = sequelizeClient.define('users', {
+  const usersGroups = sequelizeClient.define('users_groups', {
     id: {
       type: DataTypes.UUID,
       primaryKey: true,
       defaultValue: DataTypes.UUIDV4
-    },
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    email: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true
-    },
-    password: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
+    }
   }, {
     indexes: [
-      { method: 'BTREE', fields: ['organizationId'] },
-      { method: 'BTREE', fields: ['roleId'] }
+      { method: 'BTREE', fields: ['userId'] },
+      { method: 'BTREE', fields: ['groupId'] }
     ],
     hooks: {
       beforeCount(options) {
@@ -37,12 +24,12 @@ module.exports = function (app) {
   });
 
   // eslint-disable-next-line no-unused-vars
-  users.associate = function (models) {
+  usersGroups.associate = function (models) {
     // Define associations here
     // See http://docs.sequelizejs.com/en/latest/docs/associations/
-    users.belongsTo(models.organizations, { onDelete: 'CASCADE' }); // generates organizationId
-    users.belongsTo(models.roles, { onDelete: 'CASCADE' }); // generates roleId
+    usersGroups.belongsTo(models.users, { onDelete: 'CASCADE' }); // generates userId
+    usersGroups.belongsTo(models.groups, { onDelete: 'CASCADE' }); // generates groupId
   };
 
-  return users;
+  return usersGroups;
 };

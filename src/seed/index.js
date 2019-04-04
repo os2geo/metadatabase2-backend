@@ -1,4 +1,8 @@
 const organizations = require('./organizations');
-module.exports = app => {
-  app.configure(organizations);  
+const roles = require('./roles');
+const users = require('./users');
+module.exports = async app => {
+  await app.configure(organizations);
+  await app.configure(roles);
+  await app.configure(users);
 };
