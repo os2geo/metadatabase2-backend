@@ -44,6 +44,7 @@
     "cors": "^2.8.5",
     "elasticsearch": "^15.4.1",
     "feathers-elasticsearch": "^1.4.0",
+    "feathers-hooks-common": "^4.20.7",
     "feathers-sequelize": "^5.0.1",
     "helmet": "^3.16.0",
     "nano": "^8.0.1",

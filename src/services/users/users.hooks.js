@@ -1,5 +1,5 @@
 const { authenticate } = require('@feathersjs/authentication').hooks;
-
+const { disablePagination } = require('feathers-hooks-common');
 const {
   hashPassword, protect
 } = require('@feathersjs/authentication-local').hooks;
@@ -7,7 +7,7 @@ const {
 module.exports = {
   before: {
     all: [],
-    find: [ authenticate('jwt') ],
+    find: [ authenticate('jwt'), disablePagination() ],
     get: [ authenticate('jwt') ],
     create: [ hashPassword() ],
     update: [ hashPassword(),  authenticate('jwt') ],
@@ -16,7 +16,7 @@ module.exports = {
   },
 
   after: {
-    all: [ 
+    all: [
       // Make sure the password field is never sent to the client
       // Always must be the last hook
       protect('password')

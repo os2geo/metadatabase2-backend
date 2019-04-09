@@ -1,3 +1,4 @@
+const { authenticate } = require('@feathersjs/authentication').hooks;
 const esBefore = require('../../hooks/es-before');
 
 module.exports = {
@@ -5,10 +6,10 @@ module.exports = {
     all: [],
     find: [esBefore()],
     get: [],
-    create: [],
-    update: [],
-    patch: [],
-    remove: []
+    create: [authenticate('jwt')],
+    update: [authenticate('jwt')],
+    patch: [authenticate('jwt')],
+    remove: [authenticate('jwt')]
   },
 
   after: {

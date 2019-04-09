@@ -1,10 +1,12 @@
 const { authenticate } = require('@feathersjs/authentication').hooks;
+const formsBefore = require('../../hooks/forms-before');
+const getAfter = require('../../hooks/get-after');
 const { disablePagination } = require('feathers-hooks-common');
 module.exports = {
   before: {
     all: [ authenticate('jwt') ],
-    find: [disablePagination()],
-    get: [],
+    find: [disablePagination(), formsBefore()],
+    get: [formsBefore()],
     create: [],
     update: [],
     patch: [],
@@ -15,9 +17,9 @@ module.exports = {
     all: [],
     find: [],
     get: [],
-    create: [],
-    update: [],
-    patch: [],
+    create: [getAfter()],
+    update: [getAfter()],
+    patch: [getAfter()],
     remove: []
   },
 

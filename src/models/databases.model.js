@@ -20,6 +20,10 @@ module.exports = function (app) {
       allowNull: false
     }
   }, {
+    name: {
+      singular: 'database',
+      plural: 'databases',
+    },
     indexes: [
       { method: 'BTREE', fields: ['organizationId'] }
     ],
@@ -33,7 +37,7 @@ module.exports = function (app) {
   // eslint-disable-next-line no-unused-vars
   databases.associate = function (models) {
     // Define associations here
-    // See http://docs.sequelizejs.com/en/latest/docs/associations/    
+    // See http://docs.sequelizejs.com/en/latest/docs/associations/
     databases.belongsTo(models.organizations, { onDelete: 'CASCADE' }); // generates organizationId
   };
 

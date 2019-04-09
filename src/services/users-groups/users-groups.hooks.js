@@ -1,11 +1,11 @@
-
-
+const { authenticate } = require('@feathersjs/authentication').hooks;
+const { disablePagination } = require('feathers-hooks-common');
 const usersGroupsBefore = require('../../hooks/users-groups-before');
 const getAfter = require('../../hooks/get-after');
 module.exports = {
   before: {
-    all: [],
-    find: [usersGroupsBefore()],
+    all: [authenticate('jwt')],
+    find: [disablePagination(), usersGroupsBefore()],
     get: [usersGroupsBefore()],
     create: [],
     update: [],

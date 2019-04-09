@@ -5,23 +5,25 @@ const DataTypes = Sequelize.DataTypes;
 
 module.exports = function (app) {
   const sequelizeClient = app.get('sequelizeClient');
-  const permissions = sequelizeClient.define('permissions', {
+  const forms = sequelizeClient.define('forms', {
     id: {
       type: DataTypes.UUID,
       primaryKey: true,
       defaultValue: DataTypes.UUIDV4
     },
-    read: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: true
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false
     },
-    write: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: true
+    doc: {
+      type: DataTypes.JSONB,
+      allowNull: false
     }
   }, {
+    indexes: [
+      { method: 'BTREE', fields: ['databaseId'] },
+      { method: 'BTREE', fields: ['organizationId'] }
+    ],
     hooks: {
       beforeCount(options) {
         options.raw = true;
@@ -30,12 +32,12 @@ module.exports = function (app) {
   });
 
   // eslint-disable-next-line no-unused-vars
-  permissions.associate = function (models) {
+  forms.associate = function (models) {
     // Define associations here
     // See http://docs.sequelizejs.com/en/latest/docs/associations/
-    permissions.belongsTo(models.columns, { onDelete: 'CASCADE' }); // generates columnId
-    permissions.belongsTo(models.groups, { onDelete: 'CASCADE' }); // generates roleId
+    forms.belongsTo(models.organizations, { onDelete: 'CASCADE' }); // generates organizationId
+    forms.belongsTo(models.databases); // generates databaseId
   };
 
-  return permissions;
+  return forms;
 };

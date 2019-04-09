@@ -1,23 +1,22 @@
-// Initializes the `data` service on path `/data`
+// Initializes the `projects` service on path `/projects`
 const createService = require('feathers-sequelize');
-const createModel = require('../../models/data.model');
-const hooks = require('./data.hooks');
+const createModel = require('../../models/forms.model');
+const hooks = require('./forms.hooks');
 
 module.exports = function (app) {
   const Model = createModel(app);
   const paginate = app.get('paginate');
 
   const options = {
-    multi: true,
     Model,
     paginate
   };
 
   // Initialize our service with any options it requires
-  app.use('/data', createService(options));
+  app.use('/forms', createService(options));
 
   // Get our initialized service so that we can register hooks
-  const service = app.service('data');
+  const service = app.service('forms');
 
   service.hooks(hooks);
 };
