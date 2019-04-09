@@ -1,11 +1,11 @@
 module.exports = async app => {
   const service = app.service('users');
-  const users = await service.find({
+  const res = await service.find({
     query: {
-      email: 'admin'
+      email: 'admin',
     }
   });
-  if(users.length===0) {
+  if(res.total===0) {
     await service.create({
       name: 'Administrator',
       email: 'admin',
