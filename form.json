@@ -1,0 +1,219 @@
+{
+  "groups": [
+      {
+          "name": "Oversigt",
+          "fields": [
+              {
+                  "name": "????????",
+                  "type": "text",
+                  "column": "????????"
+              },
+              {
+                  "name": "Ajourdato",
+                  "type": "date",
+                  "column": "Ajourdato"
+              },
+              {
+                  "name": "InfoLink",
+                  "type": "text",
+                  "column": "InfoLink"
+              },
+              {
+                  "name": "Kommuneplan",
+                  "type": "boolean",
+                  "column": "Kommuneplan"
+              },
+              {
+                  "name": "Oprindelse",
+                  "type": "text",
+                  "column": "Oprindelse"
+              },
+              {
+                  "name": "ajourforfrekvens",
+                  "type": "text",
+                  "column": "ajourforfrekvens"
+              },
+              {
+                  "name": "beskrivelse",
+                  "type": "text",
+                  "column": "beskrivelse"
+              },
+              {
+                  "name": "konfliktsogtekst",
+                  "type": "text",
+                  "column": "konfliktsogtekst"
+              },
+              {
+                  "name": "temanavn",
+                  "type": "text",
+                  "column": "temanavn"
+              }
+          ]
+      },
+      {
+          "name": "Administration",
+          "fields": [
+              {
+                  "name": "Organisation der fremstiller data",
+                  "type": "text",
+                  "column": "OrganisatAnsvar"
+              },
+              {
+                  "name": "Ansvarlig faggruppe",
+                  "type": "text",
+                  "column": "ansvar_afd"
+              },
+              {
+                  "name": "Ansvarlig fagperson",
+                  "type": "text",
+                  "column": "ansvar_fperson"
+              },
+              {
+                  "name": "Dato for seneste ændring af metadata (Udfyldes automatisk)",
+                  "type": "timestamp",
+                  "column": "Timestamp"
+              },
+              {
+                  "name": "Bemærkning",
+                  "type": "text",
+                  "column": "bem"
+              }
+          ]
+      },
+      {
+          "name": "GIS-tekniske felter",
+          "fields": [
+              {
+                  "name": "Er data med i Bygkonfliktsøgning?",
+                  "type": "boolean ",
+                  "column": "konfliktByg"
+              },
+              {
+                  "name": "Er data med i Samletkonfliktsøgning?",
+                  "type": "boolean ",
+                  "column": "KonfliktSamlet"
+              },
+              {
+                  "name": "Vises tema også på KortInfo Borger?",
+                  "type": "boolean ",
+                  "column": "borgerGIS"
+              },
+              {
+                  "name": "Hvor ligger originaldata?",
+                  "type": "radio",
+                  "column": "Originaldata",
+                  "values": [
+                      "?",
+                      "db_Gis",
+                      "db_kommuneplankladde",
+                      "db_LOIS",
+                      "GeoDK",
+                      "KortInfo",
+                      "R:Gis",
+                      "R:Sagsbehandler",
+                      "WMS/WFS",
+                      "db_Kommuneplan2017",
+                      "Fil"
+                  ]
+              },
+              {
+                  "name": "WMS / WFS / FTP m.m. link",
+                  "type": "text",
+                  "column": "DataLink"
+              },
+              {
+                  "name": "Dataudstiller",
+                  "type": "text",
+                  "column": "Dataudstiller"
+              }
+          ]
+      },
+      {
+          "name": "I KortInfo",
+          "fields": [
+              {
+                  "name": "Lagnavn",
+                  "type": "text",
+                  "column": "Lagnavn_KI"
+              },
+              {
+                  "name": "Lagsti i KortInfo",
+                  "type": "text",
+                  "column": "Lagsti_KI"
+              },
+              {
+                  "name": "Format på data i KortInfo",
+                  "type": "radio",
+                  "column": "Dataformat_KI",
+                  "values": [
+                      "Database",
+                      "Egen_db",
+                      "Fil",
+                      "WFS",
+                      "WMS",
+                      "WMTS",
+                      "Laggruppe",
+                      "?"
+                  ]
+              },
+              {
+                  "name": "Laggruppe på Kortinfo",
+                  "type": "textarea",
+                  "column": "Laggruppe_KI"
+              }
+          ]
+      },
+      {
+          "name": "T:\\_Grunddata",
+          "fields": [
+              {
+                  "name": "Format på data i MapInfo",
+                  "type": "radio",
+                  "column": "Dataformat_MI",
+                  "values": [
+                      "Database",
+                      "Fil",
+                      "WMS",
+                      "WFS",
+                      "?"
+                  ]
+              },
+              {
+                  "name": "Lagnavn på T:\\_Grunddata",
+                  "type": "text",
+                  "column": "Lagnavn_MI"
+              },
+              {
+                  "name": "Lagsti i på T:\\_Grunddata",
+                  "type": "text",
+                  "column": "Lagsti_MI"
+              },
+              {
+                  "name": "Delmængde af fil i DB",
+                  "type": "text",
+                  "column": "FilDel_MI"
+              }
+          ]
+      },
+      {
+          "name": "Databaser",
+          "fields": [
+              {
+                  "name": "Tabel-/viewnavn",
+                  "type": "text",
+                  "column": "Tabel_view_navn"
+              },
+              {
+                  "name": "Databasenavn",
+                  "type": "text",
+                  "column": "Database"
+              },
+              {
+                  "name": "Schema",
+                  "type": "text",
+                  "column": "Schema"
+              }
+          ]
+      }
+  ]
+}
