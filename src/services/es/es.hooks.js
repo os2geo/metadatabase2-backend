@@ -1,10 +1,10 @@
 const { authenticate } = require('@feathersjs/authentication').hooks;
 const esBefore = require('../../hooks/es-before');
-
+const { disablePagination } = require('feathers-hooks-common');
 module.exports = {
   before: {
     all: [],
-    find: [esBefore()],
+    find: [disablePagination(), esBefore()],
     get: [],
     create: [authenticate('jwt')],
     update: [authenticate('jwt')],
