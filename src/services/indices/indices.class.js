@@ -1,35 +1,30 @@
 /* eslint-disable no-unused-vars */
-const elasticsearch = require('elasticsearch');
 const errors = require('@feathersjs/errors');
 const { v4 } = require('uuid');
-const client = new elasticsearch.Client({
-  host: 'localhost:9200',
-  apiVersion: '6.0'
-});
 class Service {
   constructor (options) {
     this.options = options || {};
   }
 
   find (params) {
-    return client.cat.indices({ format: 'json' });
+    return this.options.Model.cat.indices({ format: 'json' });
   }
 
   async get (id, params) {
-    const exists = await client.indices.exists({ index: id });
+    const exists = await this.options.Model.indices.exists({ index: id });
     if(!exists) {
       return new errors.NotFound();
     }
-    return client.indices.get({ index: id });
+    return this.options.Model.indices.get({ index: id });
   }
 
   async create (data, params) {
     const id = data.id || v4();
-    const exists = await client.indices.exists({ index: id });
+    const exists = await this.options.Model.indices.exists({ index: id });
     if(!exists) {
-      return client.indices.create({ index: id });
+      return this.options.Model.indices.create({ index: id });
     }
-    return client.indices.get({ index: id });
+    return this.options.Model.indices.get({ index: id });
   }
 
   async update (id, data, params) {
@@ -41,11 +36,11 @@ class Service {
   }
 
   async remove (id, params) {
-    const exists = await client.indices.exists({ index: id });
+    const exists = await this.options.Model.indices.exists({ index: id });
     if(!exists) {
       return new errors.NotFound();
     }
-    return client.indices.delete({ index: id });
+    return this.options.Model.indices.delete({ index: id });
   }
 }
 

@@ -1,5 +1,4 @@
 /* eslint-disable no-unused-vars */
-const elasticsearch = require('elasticsearch');
 const createService = require('feathers-elasticsearch');
 
 class Service {
@@ -45,18 +44,14 @@ class Service {
     if (this.services.hasOwnProperty(id)) {
       return this.services[id];
     }
-    const Model = new elasticsearch.Client({
-      host: 'localhost:9200',
-      apiVersion: '6.0'
-    });
 
-    const exists = await Model.indices.exists({ index: id });
+    const exists = await this.options.Model.indices.exists({ index: id });
     if(!exists) {
-      const res = await Model.indices.create({ index: id });
+      const res = await this.options.Model.indices.create({ index: id });
       console.log(res);
     }
     const service = createService({
-      Model,
+      Model: this.options.Model,
       paginate: this.app.get('paginate'),
       elasticsearch: {
         index: id,

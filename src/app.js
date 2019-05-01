@@ -19,9 +19,16 @@ const channels = require('./channels');
 const authentication = require('./authentication');
 
 const sequelize = require('./sequelize');
+const elasticsearch = require('./elasticsearch');
 
 const app = express(feathers());
-
+if(process.env.REDIS) {
+  console.log(`redis://${process.env.REDIS}`);
+  const sync = require('feathers-sync');
+  app.configure(sync({
+    uri: `redis://${process.env.REDIS}`
+  }));
+}
 // Load app configuration
 app.configure(configuration());
 // Enable security, CORS, compression, favicon and body parsing
@@ -41,6 +48,7 @@ app.configure(socketio(io => {
 }));
 
 app.configure(sequelize);
+app.configure(elasticsearch);
 
 // Configure other middleware (see `middleware/index.js`)
 app.configure(middleware);

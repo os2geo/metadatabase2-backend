@@ -30,5 +30,6 @@
       "passwordField": "password"
     }
   },
-  "postgres": "postgres://postgres:Zxcv1234@localhost:5432/meta"
+  "postgres": "postgres://postgres:Zxcv1234@localhost:5432/meta",
+  "elasticsearch": "localhost:9200"
 }

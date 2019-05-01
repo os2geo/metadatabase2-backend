@@ -2,6 +2,7 @@ const Sequelize = require('sequelize');
 const seed = require('./seed');
 module.exports = function (app) {
   const connectionString = app.get('postgres');
+  console.log('sequelize', connectionString);
   const sequelize = new Sequelize(connectionString, {
     dialect: 'postgres',
     logging: console.log,

@@ -3,10 +3,11 @@ const createService = require('./es.class.js');
 const hooks = require('./es.hooks');
 
 module.exports = function (app) {
-
+  const Model = app.get('esClient');
   const paginate = app.get('paginate');
 
   const options = {
+    Model,
     paginate
   };
 

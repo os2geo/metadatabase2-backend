@@ -3,10 +3,11 @@ const createService = require('./indices.class.js');
 const hooks = require('./indices.hooks');
 
 module.exports = function (app) {
-  
+  const Model = app.get('esClient');
   const paginate = app.get('paginate');
 
   const options = {
+    Model,
     paginate
   };
 
