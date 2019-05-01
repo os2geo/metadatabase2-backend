@@ -4,13 +4,13 @@ const getAfter = require('../../hooks/get-after');
 const { disablePagination } = require('feathers-hooks-common');
 module.exports = {
   before: {
-    all: [ authenticate('jwt') ],
-    find: [disablePagination(), formsBefore()],
+    all: [ ],
+    find: [authenticate('jwt'), disablePagination(), formsBefore()],
     get: [formsBefore()],
-    create: [],
-    update: [],
-    patch: [],
-    remove: []
+    create: [authenticate('jwt')],
+    update: [authenticate('jwt')],
+    patch: [authenticate('jwt')],
+    remove: [authenticate('jwt')]
   },
 
   after: {
