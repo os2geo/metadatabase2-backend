@@ -10,7 +10,8 @@ module.exports = async app => {
       name: 'Administrator',
       email: 'admin',
       password: '1234',
-      roleId: 1
+      roleId: 1,
+      isVerified: true
     });
   }
 };

@@ -21,9 +21,16 @@ module.exports = function (app) {
       unique: true
     },
     password: {
-      type: DataTypes.STRING,
-      allowNull: false
+      type: DataTypes.STRING
     },
+    isVerified: { type: DataTypes.BOOLEAN },
+    verifyToken: { type: DataTypes.STRING },
+    verifyShortToken: { type: DataTypes.STRING },
+    verifyExpires: { type: DataTypes.DATE }, // or a long integer
+    verifyChanges: { type: DataTypes.JSONB }, // an object (key-value map), e.g. { field: "value" }
+    resetToken: { type: DataTypes.STRING },
+    resetShortToken: { type: DataTypes.STRING },
+    resetExpires: { type: DataTypes.DATE } // or a long integer
   }, {
     indexes: [
       { method: 'BTREE', fields: ['organizationId'] },

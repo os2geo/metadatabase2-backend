@@ -1,31 +1,53 @@
 const { authenticate } = require('@feathersjs/authentication').hooks;
+const verifyHooks = require('feathers-authentication-management').hooks;
+const commonHooks = require('feathers-hooks-common');
 const { disablePagination } = require('feathers-hooks-common');
-const {
-  hashPassword, protect
-} = require('@feathersjs/authentication-local').hooks;
-
+const usersBeforeCreate = require('../../hooks/users-before-create');
+const usersBeforePatch = require('../../hooks/users-before-patch');
+const usersAfter = require('../../hooks/users-after');
+const usersBefore = require('../../hooks/users-before');
+const usersRestrict = require('../../hooks/users-restrict');
+const { hashPassword } = require('@feathersjs/authentication-local').hooks;
+const sendVerificationEmail = require('../../hooks/send-verification-email');
 module.exports = {
   before: {
     all: [],
-    find: [ authenticate('jwt'), disablePagination() ],
-    get: [ authenticate('jwt') ],
-    create: [ hashPassword() ],
-    update: [ hashPassword(),  authenticate('jwt') ],
-    patch: [ hashPassword(),  authenticate('jwt') ],
-    remove: [ authenticate('jwt') ]
+    find: [ authenticate('jwt'), disablePagination(), usersBefore() ],
+    get: [ authenticate('jwt'), usersBefore() ],
+    create: [hashPassword(), commonHooks.iff(commonHooks.isProvider('external'), authenticate('jwt'), usersBeforeCreate(), verifyHooks.addVerification())],
+    update: [commonHooks.disallow('external')],
+    patch: [
+      commonHooks.iff(commonHooks.isProvider('external'), authenticate('jwt'), usersBeforePatch(), commonHooks.preventChanges(
+        'email',
+        'isVerified',
+        'verifyToken',
+        'verifyShortToken',
+        'verifyExpires',
+        'verifyChanges',
+        'resetToken',
+        'resetShortToken',
+        'resetExpires'
+      ))
+    ],
+    remove: [authenticate('jwt'), usersRestrict()]
   },
 
   after: {
     all: [
-      // Make sure the password field is never sent to the client
-      // Always must be the last hook
-      protect('password')
+      commonHooks.when(
+        hook => hook.params.provider,
+        commonHooks.discard('password', 'verifyExpires', 'resetExpires', 'verifyChanges')
+      )
     ],
     find: [],
     get: [],
-    create: [],
-    update: [],
-    patch: [],
+    create: [
+      commonHooks.iff(commonHooks.isProvider('external'),sendVerificationEmail()),
+      commonHooks.iff(commonHooks.isProvider('external'),verifyHooks.removeVerification()),
+      usersAfter()
+    ],
+    update: [usersAfter()],
+    patch: [usersAfter()],
     remove: []
   },
 

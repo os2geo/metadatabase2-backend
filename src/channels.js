@@ -18,9 +18,14 @@ module.exports = function(app) {
 
       // The connection is no longer anonymous, remove it
       app.channel('anonymous').leave(connection);
+      if(connection.user.organizationId) {
+        app.channel(connection.user.organizationId).join(connection);
+      } else {
+        app.channel('system').join(connection);
+      }
 
       // Add it to the authenticated user channel
-      app.channel('authenticated').join(connection);
+      // app.channel('authenticated').join(connection);
 
       // Channels can be named anything and joined on any condition
 
@@ -38,19 +43,33 @@ module.exports = function(app) {
 
   // eslint-disable-next-line no-unused-vars
   app.publish((data, hook) => {
-    console.log('publish');
     // Here you can add event publishers to channels set up in `channels.js`
     // To publish only for a specific event use `app.publish(eventname, () => {})`
 
     // console.log('Publishing all events to all authenticated users. See `channels.js` and https://docs.feathersjs.com/api/channels.html for more information.'); // eslint-disable-line
 
     // e.g. to publish all service events to all authenticated users use
-    return app.channel('authenticated');
+    if(hook.params.user) {
+      if(hook.params.user.organizationId) {
+        return app.channel(hook.params.user.organizationId);
+      } else {
+        return app.channel('system');
+      }
+    }
+  });
+  app.service('authManagement').publish(() => {
+  });
+  app.service('email').publish(() => {
   });
   app.service('es/:database').publish((data, hook) => {
-    hook.path=`es/${hook.params.route.database}`;
-    console.log('publish es', data, hook.path);
-    return app.channel('authenticated');
+    if(hook.method !== 'create') {
+      hook.path=`es/${hook.params.route.database}`;
+      if(hook.params.user.organizationId) {
+        return app.channel(hook.params.user.organizationId);
+      } else {
+        return app.channel('system');
+      }
+    }
   });
   // Here you can also add service specific event publishers
   // e.g. the publish the `users` service `created` event to the `admins` channel

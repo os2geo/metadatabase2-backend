@@ -1,4 +1,5 @@
 {
+  "version": "1.0.0",
   "host": "localhost",
   "port": 3030,
   "public": "../public/",
@@ -28,6 +29,13 @@
       "entity": "user",
       "usernameField": "email",
       "passwordField": "password"
+    }
+  },
+  "mail": {
+    "host": "send.one.com",
+    "auth": {
+        "user": "noreply@os2geo.dk",
+        "pass": "TecreiG3"
     }
   },
   "postgres": "postgres://postgres:Zxcv1234@localhost:5432/meta",

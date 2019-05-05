@@ -5,7 +5,7 @@ module.exports = function (app) {
   console.log('sequelize', connectionString);
   const sequelize = new Sequelize(connectionString, {
     dialect: 'postgres',
-    logging: console.log,
+    logging: false, //console.log,
     operatorsAliases: false,
     define: {
       freezeTableName: true
@@ -22,7 +22,6 @@ module.exports = function (app) {
     const models = sequelize.models;
     Object.keys(models).forEach(name => {
       if ('associate' in models[name]) {
-        console.log('associate', name);
         models[name].associate(models);
       }
     });

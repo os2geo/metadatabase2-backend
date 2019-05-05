@@ -55,3 +55,5 @@ Copyright (c) 2018
 
 Licensed under the [MIT license](LICENSE).
 test
+
+kubectl apply -f elasticsearch.yaml

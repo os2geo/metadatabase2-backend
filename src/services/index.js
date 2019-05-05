@@ -1,3 +1,4 @@
+const email = require('./email/email.service.js');
 const users = require('./users/users.service.js');
 const organizations = require('./organizations/organizations.service.js');
 const databases = require('./databases/databases.service.js');
@@ -9,6 +10,7 @@ const indices = require('./indices/indices.service.js');
 const forms = require('./forms/forms.service.js');
 // eslint-disable-next-line no-unused-vars
 module.exports = function (app) {
+  app.configure(email);
   app.configure(users);
   app.configure(organizations);
   app.configure(databases);

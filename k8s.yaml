@@ -32,3 +32,8 @@ spec:
         env:
         - name: NODE_ENV
           value: "production"
+        - name: URL
+          value: metadatabase.os2geo.dk
+        - name: VERSION
+          value: 1.0.1
+

@@ -51,6 +51,7 @@ class Service {
       console.log(res);
     }
     const service = createService({
+      multi: true,
       Model: this.options.Model,
       paginate: this.app.get('paginate'),
       elasticsearch: {
