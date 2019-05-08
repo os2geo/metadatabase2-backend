@@ -1,0 +1,10 @@
+curl -X GET "localhost:9200/c2f1e827-02d8-0785-2f40-416777362e1e/_search" -H 'Content-Type: application/json' -d'
+{
+    "size":0,
+    "aggs" : {
+        "formats" : {
+            "terms" : { "field" : "Dataformat_KI.keyword" }
+        }
+    }
+}
+'

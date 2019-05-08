@@ -1,0 +1,55 @@
+{
+  "took": 7,
+  "timed_out": false,
+  "_shards": {
+    "total": 5,
+    "successful": 5,
+    "skipped": 0,
+    "failed": 0
+  },
+  "hits": {
+    "total": 1044,
+    "max_score": 0.0,
+    "hits": []
+  },
+  "aggregations": {
+    "formats": {
+      "doc_count_error_upper_bound": 0,
+      "sum_other_doc_count": 0,
+      "buckets": [
+        {
+          "key": "Database",
+          "doc_count": 692
+        },
+        {
+          "key": "WMS",
+          "doc_count": 138
+        },
+        {
+          "key": "Fil",
+          "doc_count": 98
+        },
+        {
+          "key": "WFS",
+          "doc_count": 53
+        },
+        {
+          "key": "Laggruppe",
+          "doc_count": 24
+        },
+        {
+          "key": "Egen_db",
+          "doc_count": 20
+        },
+        {
+          "key": "?",
+          "doc_count": 9
+        },
+        {
+          "key": "WMTS",
+          "doc_count": 3
+        }
+      ]
+    }
+  }
+}

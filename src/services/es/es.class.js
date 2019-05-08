@@ -36,6 +36,10 @@ class Service {
     const service = await this.getService(params.route.database);
     return service.remove(id, params);
   }
+  async raw(params) {
+    const service = await this.getService(params.route.database);
+    return service.raw('search', params.query);
+  }
   setup(app) {
     this.app = app;
   }
