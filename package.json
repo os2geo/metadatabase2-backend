@@ -30,6 +30,8 @@
     "mocha": "mocha test/ --recursive --exit",
     "db": "docker run -e POSTGRES_PASSWORD=Zxcv1234 -e POSTGRES_DB=meta -v `pwd`/database:/var/lib/postgresql/data -p 5432:5432 -d mdillon/postgis",
     "es": "docker run -p 9200:9200 -p 9300:9300 -e 'discovery.type=single-node' -v `pwd`/esdata:/usr/share/elasticsearch/data -d docker.elastic.co/elasticsearch/elasticsearch:6.7.0",
+    "es681": "docker.elastic.co/elasticsearch/elasticsearch:6.8.1",
+    "es711": "docker run -p 9200:9200 -p 9300:9300 -e 'discovery.type=single-node' -v `pwd`/es711:/usr/share/elasticsearch/data -d docker.elastic.co/elasticsearch/elasticsearch:7.1.1",
     "docker": "docker build -t runetvilum/metadatabase2-backend . && docker push runetvilum/metadatabase2-backend",
     "k8s": "kubectl apply -f k8s.yaml"
   },

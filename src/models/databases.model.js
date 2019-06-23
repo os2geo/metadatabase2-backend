@@ -15,6 +15,9 @@ module.exports = function (app) {
       type: DataTypes.STRING,
       allowNull: false
     },
+    isLocked: {
+      type: DataTypes.BOOLEAN,
+    },
     schema: {
       type: DataTypes.JSONB,
       allowNull: false
