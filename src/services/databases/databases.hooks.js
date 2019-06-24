@@ -2,13 +2,13 @@ const { authenticate } = require('@feathersjs/authentication').hooks;
 const { disablePagination } = require('feathers-hooks-common');
 module.exports = {
   before: {
-    all: [ authenticate('jwt') ],
-    find: [disablePagination()],
+    all: [],
+    find: [authenticate('jwt'), disablePagination()],
     get: [],
-    create: [],
-    update: [],
-    patch: [],
-    remove: []
+    create: [authenticate('jwt')],
+    update: [authenticate('jwt')],
+    patch: [authenticate('jwt')],
+    remove: [authenticate('jwt')]
   },
 
   after: {
