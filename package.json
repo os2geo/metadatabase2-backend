@@ -60,7 +60,8 @@
     "sequelize": "^5.8.1",
     "serve-favicon": "^2.5.0",
     "uuid": "^3.3.2",
-    "winston": "^3.2.1"
+    "winston": "^3.2.1",
+    "xlsx": "^0.15.1"
   },
   "devDependencies": {
     "eslint": "^5.16.0",

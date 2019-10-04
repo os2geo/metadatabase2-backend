@@ -6,6 +6,7 @@ const groups = require('./groups/groups.service.js');
 const usersGroups = require('./users-groups/users-groups.service.js');
 const roles = require('./roles/roles.service.js');
 const es = require('./es/es.service.js');
+const exportService = require('./export/export.service.js');
 const indices = require('./indices/indices.service.js');
 const forms = require('./forms/forms.service.js');
 // eslint-disable-next-line no-unused-vars
@@ -18,6 +19,7 @@ module.exports = function (app) {
   app.configure(usersGroups);
   app.configure(roles);
   app.configure(es);
+  app.configure(exportService);
   app.configure(indices);
   app.configure(forms);
 };
