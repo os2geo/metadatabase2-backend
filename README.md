@@ -55,5 +55,6 @@ Copyright (c) 2018
 
 Licensed under the [MIT license](LICENSE).
 test
-
+kubectl config use-context do-fra1-k8s-1-14-1-do-4-fra1-1560892933132
 kubectl apply -f elasticsearch.yaml
+cd ~/.kube && kubectl --kubeconfig="k8s-1-14-1-do-4-fra1-1560892933132-kubeconfig.yaml" apply -f ~/develop/github/metadatabase2-backend/k8s.yaml
