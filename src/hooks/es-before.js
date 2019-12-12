@@ -14,7 +14,8 @@ module.exports = function (options = {}) {
           aggs: {
             values: {
               terms: {
-                field: context.params.query.$distinct
+                field: context.params.query.$distinct,
+                size: 1000
               }
             }
           }
