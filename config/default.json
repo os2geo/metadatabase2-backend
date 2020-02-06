@@ -32,11 +32,10 @@
     }
   },
   "mail": {
-    "host": "send.one.com",
-    "auth": {
-        "user": "noreply@os2geo.dk",
-        "pass": "TecreiG3"
-    }
+    "host": "mail.os2geo.dk",
+    "port": 25,
+	  "secure": false,
+	  "ignoreTLS": true
   },
   "postgres": "postgres://postgres:Zxcv1234@localhost:5432/meta",
   "elasticsearch": "localhost:9200"

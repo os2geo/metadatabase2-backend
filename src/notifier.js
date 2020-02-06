@@ -4,8 +4,8 @@ const isProd = process.env.NODE_ENV === 'production';
 
 
 module.exports = function (app) {
-  const mailconf = app.get('mail');
-  const returnEmail = mailconf.auth.user;
+  // const mailconf = app.get('mail');
+  const returnEmail = 'no-reply@os2geo.dk';
   const emailTemplates = 'email-templates';
   function getLink (type, hash) {
     var port = isProd ? '' : ':3000';
