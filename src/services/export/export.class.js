@@ -11,12 +11,17 @@ class Service {
   async find(params) {
     const service = await this.getService(params.route.database);
     let data = [];
-    let res = await service.find();
+    let res = await service.find({
+      query: {
+        $sort: { _id: 1 }
+      }
+    });
     data = [...data, ...res.data];
     while (res.total > res.skip + res.limit) {
       res = await service.find({
         query: {
-          $skip: res.limit + res.skip
+          $skip: res.limit + res.skip,
+          $sort: { _id: 1 }
         }
       });
       data = [...data, ...res.data];
