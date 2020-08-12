@@ -11,6 +11,9 @@ RUN npm install
 # Bundle app source
 COPY . .
 
+ENV NODE_ENV=production
+ENV URL=metadatabase.os2geo.dk
+
 EXPOSE 3030
 
 CMD [ "npm", "start" ]

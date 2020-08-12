@@ -26,6 +26,7 @@
     "test": "npm run eslint && NODE_ENV= npm run mocha",
     "eslint": "eslint src/. test/. --config .eslintrc.json",
     "dev": "nodemon src/",
+    "rune": "NODE_ENV=test nodemon src/",
     "start": "node src/",
     "mocha": "mocha test/ --recursive --exit",
     "db": "docker run -e POSTGRES_PASSWORD=Zxcv1234 -e POSTGRES_DB=meta -v `pwd`/database:/var/lib/postgresql/data -p 5432:5432 -d mdillon/postgis",
