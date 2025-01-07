@@ -1,4 +1,4 @@
-FROM node:dubnium
+FROM node:lts-alpine
 # Create app directory
 WORKDIR /usr/src/app
 # Install app dependencies

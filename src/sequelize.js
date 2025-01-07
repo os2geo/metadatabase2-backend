@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const seed = require('./seed');
+//const seed = require('./seed');
 module.exports = function (app) {
   const connectionString = app.get('postgres');
   console.log('sequelize', connectionString);
@@ -28,7 +28,7 @@ module.exports = function (app) {
 
     // Sync to the database
     sequelize.sync().then(() => {
-      app.configure(seed);
+      //app.configure(seed);
     });
 
     return result;

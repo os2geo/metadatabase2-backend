@@ -1,4 +1,4 @@
-const databasesSeed = require('./databases');
+//const databasesSeed = require('./databases');
 const nano = require('nano')({
   url : 'http://admin:wont775dock@geo.os2geo.dk/couchdb',
   parseUrl : false

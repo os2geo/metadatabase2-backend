@@ -37,6 +37,6 @@
 	  "secure": false,
 	  "ignoreTLS": true
   },
-  "postgres": "postgres://doadmin:zogyfd6wj1izcr2k@db-postgresql-fra1-83518-do-user-916210-0.db.ondigitalocean.com:25060/defaultdb?ssl=true",
+  "postgres": "postgres://doadmin:zogyfd6wj1izcr2k@db-postgresql-fra1-83518-do-user-916210-0.db.ondigitalocean.com:25060/defaultdb?ssl=no-verify",
   "elasticsearch": "elasticsearch-master:9200"
 }
